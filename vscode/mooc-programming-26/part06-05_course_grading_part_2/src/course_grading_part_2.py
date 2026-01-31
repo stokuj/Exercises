@@ -1,38 +1,42 @@
-def load_students(name: str) -> dict:
-    students = {}
+def load_file(name: str, is_student: bool) -> dict:
+    dictionary = {}
 
     with open(name) as file:
         next(file) # skip header
         for line in file:
             # strip() usuwa \n i zbędne spacje z obu końców linii
             parts = line.strip().split(';')
-            students[parts[0]] = [parts[1], parts[2]]
+            if is_student:
+                dictionary[parts[0]] = [parts[1], parts[2]]
+            else:
+                dictionary[parts[0]] = sum(int(x) for x in parts[1:])
             
-    return students
-    
-def load_exercises(name: str) -> dict:
-    exercises = {}
+    return dictionary
 
-    with open(name) as file:
-        next(file) # skip header
-        for line in file:
-            # strip() usuwa \n i zbędne spacje z obu końców linii
-            parts = line.strip().split(';')
-            
-            exercises[parts[0]] = sum(int(x) for x in parts[1:])
-            
-    return exercises
-    
+def calc_grade(exercises: dict, exam_points: dict) -> dict:
+    grades = {}
+    for student in exercises:
+        exe_points = exercises[student] // 4
+        total_points = exe_points + exam_points[student]
+        
+        grade = 0
+        thresholds = [(28, 5), (24, 4), (21, 3), (18, 2), (15, 1)]
+        
+        for limit, val in thresholds:
+            if total_points >= limit:
+                grade = val
+                break 
+        
+        grades[student] = grade
+    return grades
 
-# std = load_students('students1.csv')
-# exe = load_exercises('exercises1.csv')  
-# for student in std:
-#     print(std[student][0],std[student][1], exe[student] )
+
 option1 = input('Student information: ')
 option2 = input('Exercises completed: ')
-std = load_students(option1)
-exe = load_exercises(option2)
-
-for student in std:
-    print(std[student][0],std[student][1], exe[student] )
-    
+option3 = input('Exam points: ')
+std = load_file(option1, True)
+exe = load_file(option2, False)
+poi = load_file(option3, False) 
+grades = calc_grade(exe, poi)
+for student_id in std:
+    print(std[student_id][0],std[student_id][1], grades[student_id])

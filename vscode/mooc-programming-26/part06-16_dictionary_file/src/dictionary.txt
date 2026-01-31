@@ -1,0 +1,3 @@
+tietokone:computer
+tieto:knowledge
+tietoisuus:conscience
