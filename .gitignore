@@ -8,3 +8,5 @@ ENV/
 .pytest_cache/
 .vscode/
 .idea/
+
+tmc/
