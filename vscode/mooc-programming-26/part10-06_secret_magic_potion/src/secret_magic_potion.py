@@ -13,3 +13,27 @@ class MagicPotion:
             print(f"{ingredient[0]} {ingredient[1]} grams")
 
 
+class SecretMagicPotion(MagicPotion):
+    def __init__(self, name, password: str):
+        super().__init__(name)
+        self._password = password
+        
+    def add_ingredient(self, ingredient, amount, password: str):
+        if password != self._password:
+            raise ValueError('Wrong password!')
+        return super().add_ingredient(ingredient, amount)
+        
+    def print_recipe(self, password: str):
+        if password != self._password:
+            raise ValueError('Wrong password!')
+        return super().print_recipe()
+    
+    
+if __name__ == "__main__":
+    diminuendo = SecretMagicPotion("Diminuendo maximus", "hocuspocus")
+    diminuendo.add_ingredient("Toadstool", 1.5, "hocuspocus")
+    diminuendo.add_ingredient("Magic sand", 3.0, "hocuspocus")
+    diminuendo.add_ingredient("Frogspawn", 4.0, "hocuspocus")
+    diminuendo.print_recipe("hocuspocus")
+
+    diminuendo.print_recipe("pocushocus") # WRONG password!
