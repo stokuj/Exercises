@@ -10,3 +10,7 @@ ENV/
 .idea/
 
 tmc/
+/devops-with-docker/example-frontend/node_modules
+/devops-with-docker/example-backend
+/devops-with-docker/example-backend
+/devops-with-docker/example-backend
