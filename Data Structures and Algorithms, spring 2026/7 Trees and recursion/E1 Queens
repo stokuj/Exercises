@@ -1,0 +1,4 @@
+#How many ways can you place N queens on n x n chess board so that no two queens attack each other? 
+#Two queens attack each other if they are on the same row, column or diagonal.
+
+

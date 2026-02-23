@@ -27,9 +27,6 @@ def find_mode2(numbers):
     return mode[1]
 
 
-numbers = [1, 2, 3, 2, 2, 3, 2, 2]
-#find_mode(numbers)
-
 
 
 TESTS = 2000
@@ -39,7 +36,7 @@ time2 = 0
 
 for _ in range(TESTS):
     n = random.randint(5, 200)
-    prices = [random.randint(1, 1000) for _ in range(n)]
+    numbers = [random.randint(1, 1000) for _ in range(n)]
 
     # ---- metoda 1 ----
     start = time.perf_counter()
